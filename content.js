@@ -2,7 +2,13 @@
 chrome.runtime.sendMessage({ action: "notify" });
 
 // Liste des mots-clés à détecter
-const KEYWORDS = [/d[eé]lestage/i, /d[eé]lester/i];
+// Ajout de termes malgaches pour détecter les posts sur le délestage
+// "fahatapahan-jiro" ou variantes sans tiret/espaces
+const KEYWORDS = [
+  /d[eé]lestage/i,
+  /d[eé]lester/i,
+  /fahatapahan[- ]?jiro/i
+];
 
 // Vérifie la présence d'un post de délestage récent
 function checkDelestagePosts() {
