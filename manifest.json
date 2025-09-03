@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Jirama FB Notifier",
+  "version": "1.0",
+  "description": "Affiche une notif quand tu visites le Facebook officiel de la Jirama.",
+  "permissions": ["tabs", "notifications"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.facebook.com/jiramaofisialy*"],
+      "js": ["content.js"]
+    }
+  ]
+}
