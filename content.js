@@ -2,7 +2,7 @@
 chrome.runtime.sendMessage({ action: "notify" });
 
 // Liste des mots-clés à détecter
-const KEYWORDS = [/d[eé]lestage/, /d[eé]lester/];
+const KEYWORDS = [/d[eé]lestage/i, /d[eé]lester/i];
 
 // Vérifie la présence d'un post de délestage récent
 function checkDelestagePosts() {
@@ -19,10 +19,18 @@ function checkDelestagePosts() {
 
     // 24h = 24 * 60 * 60 * 1000 ms
     if (now - utime <= 24 * 60 * 60 * 1000) {
+      // Vérifie d'abord le texte du post
+      const text = (post.innerText || '');
+      if (KEYWORDS.some((regex) => regex.test(text))) {
+        chrome.runtime.sendMessage({ action: 'notifyDelestage' });
+        return;
+      }
+
+      // Puis cherche dans les images éventuelles
       const imgs = post.querySelectorAll('img');
       for (const img of imgs) {
-        const alt = (img.getAttribute('alt') || '').toLowerCase();
-        const src = (img.getAttribute('src') || '').toLowerCase();
+        const alt = img.getAttribute('alt') || '';
+        const src = img.getAttribute('src') || '';
         if (KEYWORDS.some((regex) => regex.test(alt) || regex.test(src))) {
           chrome.runtime.sendMessage({ action: 'notifyDelestage' });
           return; // On notifie une seule fois
