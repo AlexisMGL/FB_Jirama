@@ -20,6 +20,17 @@
       <button id="save">Enregistrer</button>
       <span id="status" class="hint"></span>
     </div>
+    <label for="districtQuery">Lieu à rechercher (ex: IVANDRY)</label>
+    <input id="districtQuery" type="text" placeholder="IVANDRY" />
+    <div class="hint">Ce nom sera recherché sur les images (ex: IVANDRY, MARAIS MASAY, AMBOHIJATOVO...).</div>
+    <hr />
+    <label for="postInput">URL du post Facebook (ou code iframe)</label>
+    <input id="postInput" type="text" placeholder="Collez l'URL du post (ou iframe) ou laissez vide pour l'onglet actif" />
+    <div class="hint">Si une URL est fournie, l'onglet actif est navigué vers ce post pour le scan. Sinon, le scan se fait sur l'onglet actif tel quel.</div>
+    <div>
+      <button id="countIv">Compter \"IVANDRY\"</button>
+      <span id="scanStatus" class="hint"></span>
+    </div>
     <script src="options.js"></script>
   </body>
   </html>

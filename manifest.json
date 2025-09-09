@@ -9,15 +9,15 @@
     "48": "icon.png",
     "128": "icon.png"
   },
-  "permissions": ["notifications", "storage"],
-  "host_permissions": ["https://www.facebook.com/*"],
+  "permissions": ["notifications", "storage", "tabs", "activeTab"],
+  "host_permissions": ["https://*.facebook.com/*", "https://*.fbcdn.net/*"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.facebook.com/*"],
-      "js": ["content.js"],
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["libs/ocrad.min.js", "ivandry.js", "content.js"],
       "run_at": "document_idle"
     }
   ],
