@@ -1,16 +1,25 @@
 {
   "manifest_version": 3,
   "name": "Jirama FB Notifier",
-  "version": "1.0",
-  "description": "Affiche une notif quand tu visites le Facebook officiel de la Jirama.",
-  "permissions": ["tabs", "notifications"],
+  "version": "1.1.0",
+  "description": "Alerte quand un post de délestage (JIRAMA) est détecté sur Facebook.",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": ["notifications", "storage", "tabs", "activeTab"],
+  "host_permissions": ["https://*.facebook.com/*", "https://*.fbcdn.net/*"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.facebook.com/jiramaofisialy*"],
-      "js": ["content.js"]
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["libs/ocrad.min.js", "ivandry.js", "content.js"],
+      "run_at": "document_idle"
     }
-  ]
+  ],
+  "options_page": "options.html"
 }
